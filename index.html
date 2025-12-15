@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS BlockMiner 3D</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <style>
+        #error-console {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: rgba(100, 0, 0, 0.8);
+            color: white;
+            overflow-y: scroll;
+            padding: 10px;
+            font-family: monospace;
+            z-index: 9999;
+        }
+    </style>
+    <script>
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            const div = document.getElementById('error-console');
+            if (div) {
+                div.style.display = 'block';
+                div.innerHTML += `<div>Error: ${msg} at ${lineNo}:${columnNo}</div>`;
+            }
+            return false;
+        };
+        window.addEventListener('unhandledrejection', function (event) {
+            const div = document.getElementById('error-console');
+            if (div) {
+                div.style.display = 'block';
+                div.innerHTML += `<div>Promise Error: ${event.reason}</div>`;
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="ui">
+        <div id="crosshair">+</div>
+        <div id="instructions">
+            <img src="logo.png" alt="MIS Logo"
+                style="max-width: 150px; margin-bottom: 10px; display: block; margin: 0 auto;">
+            <h1>MIS BlockMiner 3D</h1>
+            <p>Click to Play</p>
+            <p>WASD to Move | SPACE to Jump</p>
+            <p>Left Click: Mine | Right Click / F: Place</p>
+            <p>1-5: Select Block</p>
+            <br>
+            <p>Mr. Swanson</p>
+        </div>
+        <div id="block-indicator"
+            style="position:fixed; bottom:20px; right:20px; color:white; font-size:24px; font-weight:bold; text-shadow:2px 2px 0 #000;">
+            Selected: Stone</div>
+    </div>
+    <div id="error-console"></div>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
